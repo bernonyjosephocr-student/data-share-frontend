@@ -4,17 +4,31 @@
   <div class="login-card">
     <h1>Connexion</h1>
 
-    <form>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="login">Login</label>
+        <label for="login">Email</label>
         <input
           id="login"
-          name="login"
-          type="text"
-          placeholder="Votre login"
-          autocomplete="username"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          #emailInput="ngModel"
+          placeholder="Votre email"
+          autocomplete="email"
           required
+          email
         />
+          @if (emailInput.invalid && (emailInput.touched || loginForm.submitted)) {
+            <small class="field-error">
+              @if (emailInput.errors?.['required']) {
+                L'adresse email est obligatoire.
+              }
+              @if (emailInput.errors?.['email']) {
+                Veuillez saisir une adresse email valide.
+              }
+            </small>
+          }
+    
       </div>
 
       <div class="form-group">
@@ -23,15 +37,25 @@
           id="password"
           name="password"
           type="password"
+          [(ngModel)]="password"
+          #passwordInput="ngModel"
           placeholder="Votre mot de passe"
           autocomplete="current-password"
-          required
+          required          
         />
+        @if (passwordInput.invalid && (passwordInput.touched || loginForm.submitted)) {
+          <small class="field-error">
+            Le mot de passe est obligatoire.
+          </small>
+        }
       </div>
+      @if (errorMessage) {
+        <p class="form-error" role="alert">{{ errorMessage }}</p>
+      }
       <p class="register-link">
         <a routerLink="/register">Créer un compte</a>
       </p>
-      <button type="submit" class="login-button">
+      <button type="submit" class="login-button" [disabled]="isSubmitting">
         Se connecter
       </button>
 

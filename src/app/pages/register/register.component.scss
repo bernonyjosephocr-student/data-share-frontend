@@ -146,6 +146,22 @@
   background: rgba(255, 129, 45, 0.2);
 }
 
+.form-error,
+.form-success {
+  margin: 16px 0 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.form-error {
+  color: #b42318;
+}
+
+.form-success {
+  color: #067647;
+}
+
 .register-button:focus-visible,
 .login-link:focus-visible {
   outline: 2px solid #ba681f;

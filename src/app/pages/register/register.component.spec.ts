@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { UserService } from '../../core/service/user.service';
 
 import { RegisterComponent } from './register.component';
 
@@ -10,7 +11,10 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RegisterComponent],
-      providers: [provideRouter([])]
+      providers: [
+        provideRouter([]),
+        { provide: UserService, useValue: jasmine.createSpyObj('UserService', ['register']) }
+      ]
     })
     .compileComponents();
 
