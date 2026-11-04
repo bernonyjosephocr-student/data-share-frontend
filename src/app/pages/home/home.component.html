@@ -1,11 +1,32 @@
 <section class="home-content">
   <p class="home-title">Tu veux partager un fichier ?</p>
 
-  <button
-    class="upload-button"
-    type="button"
-    aria-label="Partager un fichier"
-  >
-    <img src="/upload.svg" alt="" class="upload-icon">    
-  </button>
+  <!-- Wrapping the structural button in an accessible semantic label -->
+  <label for="home-file-picker">
+    <!-- Hidden native file input mechanism triggering the lifecycle method -->
+    <input 
+      id="home-file-picker"
+      type="file" 
+      (change)="onFileSelected($event)" 
+      style="display: none;" />
+
+    <!-- Your exact authentic custom CSS button structure remains untouched -->
+    <button
+      class="upload-button"
+      type="button"
+      aria-label="Partager un fichier"
+      style="pointer-events: none;" 
+    >
+      <img src="/upload.svg" alt="" class="upload-icon">    
+    </button>
+  </label>
+
+  <!-- Error display block if file constraints validations fail -->
+  @if (errorMessage) {
+    <div class="callout callout--error" style="margin-top: 16px; width: 100%;">
+      <p class="callout__label">{{ errorMessage }}</p>
+    </div>
+  }
 </section>
+
+

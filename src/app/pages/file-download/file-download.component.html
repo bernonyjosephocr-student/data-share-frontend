@@ -1,0 +1,107 @@
+<div class="televersement__main-wrapper">
+
+  <!-- CASE 1: LINK EXPIRED ERROR SCREEN (Desktop 12) -->
+  @if (isExpired) {
+    <div class="download-expired">
+      <h2 class="download-expired__title">Télécharger un fichier</h2>
+      
+      <div class="download-expired__alert">
+        <!-- Error alert triangle warning SVG icon -->
+        <svg class="download-expired__alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <p class="download-expired__alert-text">
+          {{ errorMessage || 'Ce lien de partage a expiré ou le fichier n\'est plus disponible sur la plateforme.' }}
+        </p>
+      </div>
+    </div>
+  }
+
+  <!-- CASE 2: ACTIVE SECURED DOWNLOAD FORM INTERFACE  -->
+  @else {
+    <div class="download-card">
+      <h2 class="download-card__title">Télécharger un fichier</h2>
+
+      <div class="download-card__content">
+        
+        <!-- File Name and Calculated Metas Summary Header -->
+        <div class="download-card__file">
+          <!-- Document native folder file lock SVG icon -->
+          <svg class="download-card__file-icon" viewBox="0 0 24 24" fill="none" stroke="#ba681f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <div class="download-card__file-details">
+            <p class="download-card__file-name">{{ fileName }}</p>
+            <p class="download-card__file-size">{{ (fileSize / 1024 / 1024) | number:'1.0-2' }} MB</p>
+          </div>
+        </div>
+
+        <!-- DYNAMIC NOTICE: Classes adapt seamlessly without inline styling parameters -->
+        <!-- Desktop 10 Case: File expires tomorrow (Orange Warning Box Modifier) -->
+        @if (remainingDays === 1) {
+          <div class="download-card__notice download-card__notice--warning">
+            <p></p>
+            <svg class="download-card__notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p class="download-card__notice-text">Ce fichier expirera demain.</p>
+          </div>
+        }
+        <!-- Desktop 9 Case: File has multiple days left (Blue Info Box Modifier) -->
+        @else {
+          <div class="download-card__notice download-card__notice--info">
+            <svg class="download-card__notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <p class="download-card__notice-text">Ce fichier expirera dans {{ remainingDays }} jours.</p>
+          </div>
+        }
+
+        <!-- FORM SECURED AREA: Active only if password was set during encryption upload phase -->
+        @if (isPasswordRequired) {
+          <form [formGroup]="downloadForm" class="download-card__fields-wrapper">
+            <div class="download-card__field">
+              <label class="download-card__label">Mot de passe</label>
+              <input 
+                type="password" 
+                formControlName="password" 
+                placeholder="Entrez le mot de passe de protection..." 
+                class="download-card__input" />
+            </div>
+          </form>
+        }
+
+        <!-- Global failure handler callout message block if decryption keys mismatched -->
+        @if (errorMessage) {
+          <div class="callout callout--error">
+            <p class="callout__label">{{ errorMessage }}</p>
+          </div>
+        }
+
+        <!-- ACTION BUTTON: Changes states dynamically, maps directly to disabled bounds if password incomplete -->
+        <button 
+          (click)="onExecuteDownload()"
+          [disabled]="isDownloading || (isPasswordRequired && downloadForm.invalid)"
+          class="download-card__button">
+          <!-- Download arrows cloud box native SVG icon representation path -->
+          <svg class="download-card__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          {{ isDownloading ? 'Téléchargement...' : 'Télécharger' }}
+        </button>
+
+      </div>
+    </div>
+  }
+
+</div>

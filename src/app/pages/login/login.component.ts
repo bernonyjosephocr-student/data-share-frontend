@@ -29,7 +29,8 @@ export class LoginComponent {
 
     this.userService.login({ email: this.email, password: this.password }).subscribe({
       next: ({ token }) => {
-        sessionStorage.setItem('token', token);
+        console.info('Login successful. Received token:', token);
+        this.userService.saveToken(token);
         this.isSubmitting = false;
         void this.router.navigate(['/']);
       },

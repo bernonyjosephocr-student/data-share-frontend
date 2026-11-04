@@ -1,0 +1,135 @@
+<div class="televersement__main-wrapper">
+
+  <!-- STEP 2: METADATA FORM INTERFACE -->
+  @if (currentStep === 'FILL_METADATA') {
+    <form [formGroup]="uploadForm" (ngSubmit)="onUpload()" class="upload-card">
+      <h2 class="upload-card__title">Ajouter un fichier</h2>
+
+      <!-- Selected File Row Summary -->
+      <div class="upload-card__file-row">
+        <div class="upload-card__file">
+          <!-- Inline Document SVG Icon -->
+          <svg class="upload-card__file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <div class="upload-card__file-details">
+            <p class="upload-card__file-name">{{ selectedFiles[0].name }}</p>
+            <p class="upload-card__file-size">{{ (selectedFiles[0].size / 1024 / 1024) | number:'1.2-3' }} Mo</p>
+          </div>
+          <button type="button" (click)="cancelAndReturnHome()" class="upload-card__button upload-card__button--change">
+            Changer
+          </button>
+        </div>
+      </div>
+
+      <!-- Form Fields Stack -->
+      <div class="upload-card__fields">
+
+        <div class="upload-card__field upload-card__field--password">
+          <label class="upload-card__label">Mot de passe</label>
+          <input type="password" formControlName="filePassword" placeholder="Min 6 characters if set..." class="upload-card__input" />
+        </div>
+
+        <div class="upload-card__field">
+          <label class="upload-card__label">Expiration</label>
+          <div class="upload-card__select-wrapper">
+            <select formControlName="retentionDays" class="upload-card__select">
+              <option [ngValue]="1">1 journée</option>
+              <option [ngValue]="3">3 jours</option>
+              <option [ngValue]="7">7 jours (Maximum)</option>
+            </select>
+            <!-- Native Chevron SVG Overlay -->
+            <svg class="upload-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Tags Module -->
+        @if (isTagsVisible) {
+        <div class="upload-card__field">
+          <label class="upload-card__label">Tags (Press enter)</label>
+          <input type="text" [(ngModel)]="tagInput" [ngModelOptions]="{standalone: true}" (keydown.enter)="addTag($event)" placeholder="Add unique tags..." class="upload-card__input" />
+          
+          @if (tags.size > 0) {
+            <div class="upload-card__tags-list">
+              @for (tag of tags; track tag) {
+                <span class="upload-card__tag-badge">
+                  {{ tag }}
+                  <b (click)="removeTag(tag)" class="upload-card__tag-remove">&times;</b>
+                </span>
+              }
+            </div>
+          }
+        </div>
+       }
+      </div>
+
+      <!-- Global Error Handler Callout -->
+      @if (errorMessage) {
+        <div class="callout callout--error">
+          <p class="callout__label">{{ errorMessage }}</p>
+        </div>
+      }
+
+    <button 
+        type="submit" 
+        [disabled]="uploadForm.invalid || isUploading" 
+        class="upload-card__button">
+        <!-- Cloud Upload SVG Icon -->
+        <svg class="upload-card__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        {{ isUploading ? 'Téléversement...' : 'Téléverser' }}
+    </button>
+
+
+    </form>
+  }
+
+  <!-- STEP 3: SUCCESS & LINK SHARING STATE PANEL  -->
+  @if (currentStep === 'UPLOAD_SUCCESS') {
+    <div class="upload-success">
+      <h2 class="upload-success__title">File shared successfully!</h2>
+
+      <!-- Shared File Context Row Summary -->
+      <div class="upload-success__file">
+        <svg class="upload-success__file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+        </svg>
+        <div class="upload-success__file-details">
+          <p class="upload-success__file-name">{{ selectedFiles[0].name }}</p>
+          <p class="upload-success__file-size">{{ (selectedFiles[0].size / 1024 / 1024) | number:'1.0-2' }} MB</p>
+        </div>
+      </div>
+      
+      <div class="upload-success__content">
+        <p class="upload-success__message">Your unique secured download link has been generated:</p>
+        
+        <div class="upload-success__share-box">
+          <span class="upload-success__share-link">http://localhost:4200/{{ generatedDownloadToken }}</span>
+        </div>
+
+        <div class="upload-success__actions-group">
+          <!-- Copy to Clipboard Functionality Button Trigger -->
+          <button (click)="copyLinkToClipboard()" class="upload-success__copy-button" style="flex: 1;">
+            <svg class="upload-success__copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copier le lien
+          </button>
+          
+          <button (click)="cancelAndReturnHome()" class="upload-card__button upload-card__button--change" style="flex: 1;">
+            Share another file
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

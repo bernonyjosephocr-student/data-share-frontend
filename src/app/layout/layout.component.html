@@ -1,8 +1,29 @@
 <div class="layout">
     <header class="header">
-    <div class="header-content">
-        <a class="logo" routerLink="/">DataShare</a>
-        <a class="login-button" routerLink="/login">Se connecter</a>
+    <div class="header__inner">
+        <a class="header__brand" routerLink="/">DataShare</a>
+      <!-- Dynamic buttons management -->
+      <div class="header__action">
+        <!-- Case 1 : Not connected -->
+        @if (!userService.isLoggedIn()) {
+          <a routerLink="/login" class="button button--dark">Se connecter</a>
+        } 
+        
+        <!-- Case 2 : Connected but on the home page -->
+        @else if (userService.isLoggedIn()) {
+          <a routerLink="/my-space" class="button button--dark">Mon espace</a>
+        } 
+        
+        <!-- Case 3 : Connected and on the loggedin space-->
+        @else if (router.url === '/my-space') {
+          <a routerLink="/" class="button button--secondary button--small" style="margin-right: 8px;">
+            Ajouter un fichier
+          </a>
+          <button (click)="logout()" class="button button--tertiary button--small">
+            Déconnexion
+          </button>
+        }
+      </div>
     </div>
     </header>
 

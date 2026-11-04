@@ -13,17 +13,44 @@
   );
 }
 
+/* ========================================
+   COMMON
+   ======================================== */
+:root {
+  --font-ui: "DM Sans", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  --text: #1e1e1e;
+  --placeholder: #b3b3b3;
+  --border: #d9d9d9;
+  --radius: 8px;
+
+  --primary-bg: rgb(255 129 45 / 13%);
+  --primary-border: rgb(205 94 20 / 50%);
+  --primary-text: #ba681f;
+
+  --accent: #e27f29;
+  --accent-border: #ffa569;
+
+  --dark-bg: #2c2c2c;
+  --dark-text: #f3eeea;
+
+  --disabled-text: #aea49b;
+  --disabled-bg: rgb(183 167 156 / 20%);
+  --disabled-dark-bg: #f4eee9;
+}
+
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.header {
+/* .header {
   width: 100%;
   min-height: 72px;
   box-sizing: border-box;
-}
+} */
 
 .header-content {
   display: flex;
@@ -106,4 +133,102 @@
   align-items: center;
   padding: 24px;
   box-sizing: border-box;
+}
+
+/* ========================================
+   BUTTON COMPONENT
+   ======================================== */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  
+  /* Dimensions fixes et centrées de votre maquette d'origine */
+  width: 123px;
+  height: 40px;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 8px;
+  
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button--small {
+  width: auto;
+  height: 32px;
+  padding: 8px 12px;
+}
+
+.button--secondary {
+  background: transparent;
+  color: #e27f29;
+  box-shadow: inset 0 0 0 1px #ffa569;
+}
+
+.button--tertiary {
+  background: transparent;
+  color: #e27f29;
+}
+
+.button--dark {
+  background: #2C2C2C !important; /* Couleur gris foncé rétablie */
+  color: #F3EEEA !important;     /* Couleur du texte claire rétablie */
+}
+
+
+/* ========================================
+   HEADER COMPONENT
+   ======================================== */
+
+
+/* ========================================
+   HEADER COMPONENT (Fixed Alignment)
+   ======================================== */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center; /* Centre verticalement le logo et le bouton */
+  justify-content: space-between; /* Pousse le logo à gauche et l'action à droite */
+  gap: 10px;
+  width: 100%;
+  
+  min-height: 72px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.header__brand {
+  color: #100218;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1; /* Aligne proprement la ligne de base du texte */
+}
+
+.header__action {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center; /* Centre le bouton dans sa zone d'action */
+}
+
+
+.header__action {
+  flex: 0 0 auto;
 }

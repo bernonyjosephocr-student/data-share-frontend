@@ -3,6 +3,9 @@ import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { UploadComponent } from './pages/upload/upload.component';
+import { authGuard } from './core/guards/auth.guard';
+import { FileDownloadComponent } from './pages/file-download/file-download.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +24,14 @@ export const routes: Routes = [
             {
                 path: 'register',
                 component: RegisterComponent
+            },
+            {
+                path: 'upload',
+                component: UploadComponent
+            },
+            {
+                path: ':token',
+                component: FileDownloadComponent
             }
         ]
     }

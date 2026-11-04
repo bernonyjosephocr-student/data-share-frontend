@@ -1,0 +1,265 @@
+/* ========================================
+   FUSED STRUCTURAL MAIN CONTAINER
+   ======================================== */
+.televersement__main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.download-card,
+.download-card *,
+.download-card *::before,
+.download-card *::after {
+  box-sizing: border-box;
+}
+
+/* Carte : 640 × 368 px avec le contenu de la maquette */
+
+.download-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 640px;
+  max-width: 100%;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 12px rgb(0 0 0 / 25%);
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Titre */
+
+.download-card__title {
+  width: 100%;
+  margin: 0;
+  font: 700 28px/40px "DM Sans", sans-serif;
+  text-align: center;
+}
+
+/* Groupe : fichier, information et mot de passe */
+
+.download-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Récapitulatif du fichier */
+
+.download-card__file {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px;
+}
+
+.download-card__file-icon {
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.download-card__file-details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.download-card__file-name {
+  margin: 0;
+  overflow: hidden;
+  font: 400 16px/24px "Inter", sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.download-card__file-size {
+  margin: 0;
+  font: 400 14px/16px "DM Sans", sans-serif;
+}
+
+/* Information d’expiration */
+
+.download-card__notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #e2ecff;
+  color: #2a3f72;
+  box-shadow: inset 0 0 0 1px #b1c9f5;
+    &--info {
+      background: #e2ecff;
+      color: #2a3f72;
+      box-shadow: inset 0 0 0 1px #b1c9f5;
+    }
+
+    &--warning {
+      background: #fff5ed;
+      color: #aa642b;
+      box-shadow: inset 0 0 0 1px #e6cbb5;
+      padding: initial;
+    }
+}
+
+.download-card__notice-icon {
+  display: block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.download-card__notice-text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: 400 14px/16px "DM Sans", sans-serif;
+}
+
+/* Mot de passe */
+
+.download-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.download-card__label {
+  color: #1e1e1e;
+  font: 400 16px/24px "Inter", sans-serif;
+}
+
+.download-card__input {
+  width: 100%;
+  height: 40px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  color: #1e1e1e;
+  box-shadow: inset 0 0 0 1px #d9d9d9;
+  font: 400 16px/16px "DM Sans", sans-serif;
+}
+
+.download-card__input::placeholder {
+  color: #b3b3b3;
+  opacity: 1;
+}
+
+/* Bouton Télécharger — actif */
+
+.download-card__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 40px;
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: rgb(255 129 45 / 13%);
+  color: #ba681f;
+  box-shadow: inset 0 0 0 1px rgb(205 94 20 / 50%);
+  font: 400 16px/16px "DM Sans", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.download-card__button-icon {
+  display: block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+/* ========================================
+   CASE B: THE EXPIRED SCREEN CARD STYLING (Figma Source 4)
+   ======================================== */
+.download-expired {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 640px;
+  max-width: 100%;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 12px rgb(0 0 0 / 25%);
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Titre « Télécharger un fichier » */
+
+.download-expired__title {
+  width: 100%;
+  margin: 0;
+  font: 700 28px/40px "DM Sans", sans-serif;
+  text-align: center;
+}
+
+/* Alerte d’expiration */
+
+.download-expired__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #ffe2e2;
+  color: #9c3333;
+  box-shadow: inset 0 0 0 1px #e8a6a6;
+}
+
+.download-expired__alert-icon {
+  display: block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.download-expired__alert-text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: 400 14px/16px "DM Sans", sans-serif;
+  overflow-wrap: anywhere;
+}
+/* Fused structural validation warning messages handler */
+.callout {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+
+  &--error {
+    background: #ffe2e2;
+    color: #9c3333;
+    border: 1px solid #e8a6a6;
+  }
+}

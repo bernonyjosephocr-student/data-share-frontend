@@ -67,7 +67,8 @@
               "buildTarget": "data-share-frontend:build:production"
             },
             "development": {
-              "buildTarget": "data-share-frontend:build:development"
+              "buildTarget": "data-share-frontend:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
