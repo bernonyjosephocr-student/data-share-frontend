@@ -6,6 +6,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { UploadComponent } from './pages/upload/upload.component';
 import { authGuard } from './core/guards/auth.guard';
 import { FileDownloadComponent } from './pages/file-download/file-download.component';
+import { MySpaceComponent } from './pages/my-space/my-space.component';
 
 export const routes: Routes = [
     {
@@ -28,6 +29,11 @@ export const routes: Routes = [
             {
                 path: 'upload',
                 component: UploadComponent
+            },
+            {
+                path: 'my-space',
+                component: MySpaceComponent,
+                canActivate: [authGuard]
             },
             {
                 path: ':token',

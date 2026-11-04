@@ -1,6 +1,6 @@
 <div class="televersement__main-wrapper">
 
-  <!-- CASE 1: LINK EXPIRED ERROR SCREEN (Desktop 12) -->
+  <!-- CASE 1: LINK EXPIRED ERROR SCREEN -->
   @if (isExpired) {
     <div class="download-expired">
       <h2 class="download-expired__title">Télécharger un fichier</h2>
@@ -41,7 +41,7 @@
         </div>
 
         <!-- DYNAMIC NOTICE: Classes adapt seamlessly without inline styling parameters -->
-        <!-- Desktop 10 Case: File expires tomorrow (Orange Warning Box Modifier) -->
+        <!-- Case: File expires tomorrow (Orange Warning Box Modifier) -->
         @if (remainingDays === 1) {
           <div class="download-card__notice download-card__notice--warning">
             <p></p>
@@ -53,7 +53,7 @@
             <p class="download-card__notice-text">Ce fichier expirera demain.</p>
           </div>
         }
-        <!-- Desktop 9 Case: File has multiple days left (Blue Info Box Modifier) -->
+        <!-- Case: File has multiple days left (Blue Info Box Modifier) -->
         @else {
           <div class="download-card__notice download-card__notice--info">
             <svg class="download-card__notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

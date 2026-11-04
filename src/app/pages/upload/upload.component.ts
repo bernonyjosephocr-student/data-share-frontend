@@ -119,7 +119,7 @@ export class UploadComponent implements OnInit {
         console.log('File uploaded successfully. Received download token:', fileUploadResponse.downloadToken);
         this.generatedDownloadToken = fileUploadResponse.downloadToken;
         console.log('File uploaded successfully. Received download token:', this.generatedDownloadToken);
-        // Switch view state straight to success layout panels without refreshing paths (Desktop 3)
+        // Switch view state straight to success layout panels
         this.currentStep = 'UPLOAD_SUCCESS';
       },
       error: (error) => {

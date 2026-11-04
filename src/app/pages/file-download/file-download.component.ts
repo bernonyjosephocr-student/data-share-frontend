@@ -71,7 +71,7 @@ export class FileDownloadComponent implements OnInit {
       // 3. Evaluate temporal constraints immediately to toggle step views layout rules
       const currentTimestamp = Math.floor(Date.now() / 1000);
       if (currentTimestamp >= payload.exp) {
-        this.isExpired = true; // Triggers Desktop 12 Expired view state
+        this.isExpired = true; // Triggers Expired view state
         return;
       }
 

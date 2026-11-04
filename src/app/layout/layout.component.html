@@ -1,39 +1,83 @@
-<div class="layout">
-    <header class="header">
-    <div class="header__inner">
-        <a class="header__brand" routerLink="/">DataShare</a>
-      <!-- Dynamic buttons management -->
-      <div class="header__action">
-        <!-- Case 1 : Not connected -->
-        @if (!userService.isLoggedIn()) {
-          <a routerLink="/login" class="button button--dark">Se connecter</a>
-        } 
-        
-        <!-- Case 2 : Connected but on the home page -->
-        @else if (userService.isLoggedIn()) {
-          <a routerLink="/my-space" class="button button--dark">Mon espace</a>
-        } 
-        
-        <!-- Case 3 : Connected and on the loggedin space-->
-        @else if (router.url === '/my-space') {
-          <a routerLink="/" class="button button--secondary button--small" style="margin-right: 8px;">
-            Ajouter un fichier
+<!-- ======================================================================
+     This layout is for  "mon-espace" page only, it replaces the standard header and footer layout components
+     ====================================================================== -->
+@if (router.url === '/my-space') {
+  <div class="mon-espace">
+    
+    <!-- Sidebar Navigation Menu Left Side Panel -->
+    <aside class="mon-espace__sidebar">
+      <div class="mon-espace__sidebar-header">
+        <a class="mon-espace__brand" routerLink="/">DataShare</a>
+      </div>
+      
+      <nav class="mon-espace__navigation">
+        <a class="mon-espace__navigation-link" routerLink="/my-space" aria-current="page">
+          <!-- Optional inline dynamic asset file icon descriptor here -->
+          Mes fichiers
+        </a>
+      </nav>
+      
+      <footer class="mon-espace__copyright">
+        <p>Copyright DataShare© 2026</p>
+      </footer>
+    </aside>
+
+    <!-- Main Content Section Wrapper Area Right Side -->
+    <main class="mon-espace__main">
+      
+      <!-- Top Action Toolbar Area replacing standard global Header layout components -->
+      <div class="mon-espace__toolbar">
+        <div class="mon-espace__toolbar-actions">
+          <a routerLink="/" class="mon-espace__button mon-espace__button--dark">
+            Ajouter des fichiers
           </a>
-          <button (click)="logout()" class="button button--tertiary button--small">
+          <!-- Button Déconnexion-->
+          <button (click)="logout()" class="mon-espace__button mon-espace__button--tertiary mon-espace__button--clickable">
+            <!-- Icon for déconnexion button-->
+            <svg class="mon-espace__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
             Déconnexion
           </button>
-        }
+        </div>
       </div>
-    </div>
-    </header>
 
-    <main class="page-content">
-    <router-outlet />
+      <!-- Nested Component Viewport loading your custom Dashboard/Files lists -->
+      <router-outlet />
     </main>
 
-    <footer class="footer">
-    <div class="footer-content">
-        <p>Copyright DataShare© 2025</p>
-    </div>
-    </footer>
-</div>
+  </div>
+}
+@else {
+  <div class="layout">
+      <header class="header">
+      <div class="header__inner">
+          <a class="header__brand" routerLink="/">DataShare</a>
+        <!-- Dynamic buttons management -->
+        <div class="header__action">
+          <!-- Case 1 : Not connected -->
+          @if (!userService.isLoggedIn()) {
+            <a routerLink="/login" class="button button--dark">Se connecter</a>
+          } 
+          
+          <!-- Case 2 : Connected but on the home page -->
+          @else if (userService.isLoggedIn()) {
+            <a routerLink="/my-space" class="button button--dark">Mon espace</a>
+          } 
+        </div>
+      </div>
+      </header>
+
+      <main class="page-content">
+      <router-outlet />
+      </main>
+
+      <footer class="footer">
+      <div class="footer-content">
+          <p>Copyright DataShare© 2025</p>
+      </div>
+      </footer>
+  </div>
+}

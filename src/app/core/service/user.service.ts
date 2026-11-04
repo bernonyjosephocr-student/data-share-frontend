@@ -105,8 +105,9 @@ export class UserService {
   /**
    * Destroys the current user session by removing the stored JWT.   * 
    */
-  clearSession(): void {
-    sessionStorage.removeItem(this.TOKEN_KEY);
+  clearSession(): void {    
+    localStorage.removeItem(this.TOKEN_KEY);
+    console.info('User session cleared. Token removed from storage.');
   }
 
 }

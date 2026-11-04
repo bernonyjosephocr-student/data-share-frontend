@@ -1,0 +1,104 @@
+<div class="mon-espace__content">
+  <h1 class="mon-espace__title">Mes fichiers</h1>
+
+  <!-- Filter Selector Tab Row -->
+  <div class="mon-espace__filters">
+    <button 
+      (click)="applyFilter('ALL')" 
+      [attr.aria-pressed]="activeFilter === 'ALL'" 
+      class="mon-espace__filter">
+      Tous
+    </button>
+    <button 
+      (click)="applyFilter('ACTIVE')" 
+      [attr.aria-pressed]="activeFilter === 'ACTIVE'" 
+      class="mon-espace__filter">
+      Actifs
+    </button>
+    <button 
+      (click)="applyFilter('EXPIRED')" 
+      [attr.aria-pressed]="activeFilter === 'EXPIRED'" 
+      class="mon-espace__filter">
+      Expirés
+    </button>
+  </div>
+
+  <!-- Loading & Error Fallback Notifications Block Layout -->
+  @if (isLoading) {
+    <p class="mon-espace__expired-message">Chargement du catalogue de partage...</p>
+  }
+
+  @if (errorMessage) {
+    <div style="background: #ffe2e2; color: #9c3333; padding: 12px; border-radius: 8px; font-size: 14px; width: 100%;">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- Empty State Handler if no rows match current filtered collection -->
+  @if (!isLoading && filteredFiles.length === 0) {
+    <p class="mon-espace__expired-message">Aucun fichier trouvé dans cette catégorie.</p>
+  }
+
+  <!-- File Listing Stack Segment Loop -->
+  @if (!isLoading && filteredFiles.length > 0) {
+    <ul class="mon-espace__list">
+      @for (file of filteredFiles; track file.id) {
+        <!-- Dynamic modifier assignment if the file day boundary calculation has expired -->
+        <li 
+          class="mon-espace__file" 
+          [class.mon-espace__file--expired]="isFileExpired(file.expiryDate)">
+          
+          <!-- Document Vector Icon asset descriptor -->
+          <svg class="mon-espace__file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #e27f29;">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+
+          <!-- File details context text metadata columns -->
+          <div class="mon-espace__file-details">
+            <p class="mon-espace__file-name">{{ file.name }}</p>
+            
+            @if (isFileExpired(file.expiryDate)) {
+              <p class="mon-espace__file-expiration">Expiré le {{ file.expiryDate | date:'dd/MM/yyyy' }}</p>
+            } @else {
+              <p class="mon-espace__file-expiration">Expire le {{ file.expiryDate | date:'dd/MM/yyyy' }}</p>
+            }
+          </div>
+
+          <!-- Actions Group layout segment row panel controls -->
+          <div class="mon-espace__file-actions">
+            
+            <!-- Secure Lock indicator overlay visible if password required flag true -->
+            @if (file.isPasswordProtected) {
+              <svg class="mon-espace__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            }
+
+            <button (click)="deleteFile(file.id, $event)" class="mon-espace__button mon-espace__button--outline" style="color: #c62020;">
+              <svg class="mon-espace__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+              </svg>                
+              Supprimer
+            </button>
+            
+            @if (!isFileExpired(file.expiryDate)) {
+              <button (click)="navigateToFile(file.downloadToken)" class="mon-espace__button mon-espace__button--outline">
+                Accéder
+                <svg class="mon-espace__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            }
+          </div>
+
+        </li>
+      }
+    </ul>
+  }
+</div>

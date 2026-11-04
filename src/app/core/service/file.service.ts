@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FileUploadResponse } from '../interface/FileMetadata';
+import { FileMetadata, FileUploadResponse } from '../interface/FileMetadata';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,14 @@ export class FileService {
   downloadFile(payloadRequest: any): Observable<Blob> {
     console.log('Downloading file with request:', payloadRequest);
     return this.httpClient.post(`${this.filesEndpoint}/download`, payloadRequest, { responseType: 'blob' });
+  }
+
+  fetchFilesForUser(): Observable<FileMetadata[]> {
+    return this.httpClient.get<FileMetadata[]>(`${this.authFilesEndpoint}`);
+  }
+
+  deleteFile(fileId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.authFilesEndpoint}/${fileId}`);
   }
 
 }

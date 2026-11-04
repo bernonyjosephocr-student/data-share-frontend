@@ -228,7 +228,185 @@
   align-items: center; /* Centre le bouton dans sa zone d'action */
 }
 
-
-.header__action {
-  flex: 0 0 auto;
+/* ========================================
+   MON ESPACE COMPONENT CSS
+   ======================================== */
+.mon-espace {
+  display: grid;
+  grid-template-columns: 259px minmax(0, 1fr);
+  min-height: 100vh;
+  background: #fff8f3;
+  color: #000;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
+
+.mon-espace :where(h1, p) {
+  margin: 0;
+}
+
+/* ========================================
+   BARRE LATÉRALE
+   ======================================== */
+
+.mon-espace__sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(
+    170deg,
+    #ffb88c 0%,
+    #de6262 100%
+  );
+
+  /* Contour intérieur, sans réduire le contenu */
+  box-shadow: inset -2px 0 rgb(98 54 26 / 15%);
+}
+
+.mon-espace__sidebar-header {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  padding: 0 32px;
+}
+
+.mon-espace__brand {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  text-decoration: none;
+}
+
+.mon-espace__navigation {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+}
+
+.mon-espace__navigation-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 20px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  color: #803a00;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.mon-espace__navigation-link[aria-current="page"] {
+  background: rgb(255 255 255 / 40%);
+}
+
+.mon-espace__copyright {
+  padding: 16px 24px;
+  color: #f1e9e2;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* ========================================
+   BARRE SUPÉRIEURE
+   ======================================== */
+
+.mon-espace__main {
+  min-width: 0;
+}
+
+.mon-espace__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 64px;
+  padding: 16px 48px;
+  background: #ffeee3;
+  box-shadow: inset 0 -1px rgb(216 97 28 / 29%);
+}
+
+.mon-espace__toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mon-espace__button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 20px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #e27f29;
+  font: 400 16px/16px "DM Sans", sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* « Ajouter des fichiers » */
+
+.mon-espace__button--dark {
+  background: #2c2c2c;
+  color: #f3eeea;
+}
+
+/* « Supprimer » et « Accéder » */
+
+.mon-espace__button--outline {
+  box-shadow: inset 0 0 0 1px #ffa569;
+}
+
+/* « Déconnexion » */
+
+.mon-espace__button--tertiary {
+  background: transparent;
+  color: #e27f29;
+  box-shadow: none;
+}
+
+.mon-espace__button-icon {
+  display: block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* ========================================
+   INTERACTION EFFECTS FOR ACTION BUTTONS
+   ======================================== */
+
+/* Effet au survol (Hover) pour inviter au clic */
+.mon-espace__button--clickable:hover {
+  opacity: 0.85;
+  color: #ba681f; /* Rend la couleur orange un peu plus soutenue au survol */
+}
+
+/* Matérialisation du clic (Active state) */
+.mon-espace__button--clickable:active {
+  transform: scale(0.95); /* Effet d'enfoncement physique du bouton */
+  opacity: 0.7;           /* Changement d'aspect visuel par transparence instantanée */
+  transition: transform 0.05s ease; /* Transition ultra-rapide pour être réactif */
+}
+
+/* Alignement parfait de l'icône SVG à gauche du texte déconnexion */
+.mon-espace__button-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+}
+
+
