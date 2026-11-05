@@ -4,19 +4,12 @@
   @if (isExpired) {
     <div class="download-expired">
       <h2 class="download-expired__title">Télécharger un fichier</h2>
-      
-      <div class="download-expired__alert">
-        <!-- Error alert triangle warning SVG icon -->
-        <svg class="download-expired__alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-          <line x1="12" y1="9" x2="12" y2="13"></line>
-          <line x1="12" y1="9" x2="12" y2="13"></line>
-          <line x1="12" y1="17" x2="12.01" y2="17"></line>
-        </svg>
-        <p class="download-expired__alert-text">
-          {{ errorMessage || 'Ce lien de partage a expiré ou le fichier n\'est plus disponible sur la plateforme.' }}
-        </p>
+
+      <div class="callout callout--error">
+        <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <span class="callout__text">{{ errorMessage || 'Ce lien de partage a expiré ou le fichier n\'est plus disponible sur la plateforme.' }}</span>
       </div>
+
     </div>
   }
 
@@ -43,25 +36,17 @@
         <!-- DYNAMIC NOTICE: Classes adapt seamlessly without inline styling parameters -->
         <!-- Case: File expires tomorrow (Orange Warning Box Modifier) -->
         @if (remainingDays === 1) {
-          <div class="download-card__notice download-card__notice--warning">
-            <p></p>
-            <svg class="download-card__notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="8" x2="12" y2="12"></line>
-              <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-            <p class="download-card__notice-text">Ce fichier expirera demain.</p>
+          <div class="callout callout--warning">
+            <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span class="callout__text">Ce fichier expirera demain.</span>
           </div>
+
         }
         <!-- Case: File has multiple days left (Blue Info Box Modifier) -->
         @else {
-          <div class="download-card__notice download-card__notice--info">
-            <svg class="download-card__notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-            <p class="download-card__notice-text">Ce fichier expirera dans {{ remainingDays }} jours.</p>
+          <div class="callout callout--info">
+            <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span class="callout__text">Ce fichier expirera dans {{ remainingDays }} jours.</span>
           </div>
         }
 
@@ -82,23 +67,32 @@
         <!-- Global failure handler callout message block if decryption keys mismatched -->
         @if (errorMessage) {
           <div class="callout callout--error">
-            <p class="callout__label">{{ errorMessage }}</p>
+            <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span class="callout__text">{{ errorMessage }}</span>
           </div>
         }
 
-        <!-- ACTION BUTTON: Changes states dynamically, maps directly to disabled bounds if password incomplete -->
+        <!-- ACTION BUTTON: Accessible to click even when form is incomplete to trigger runtime error messages -->
         <button 
           (click)="onExecuteDownload()"
-          [disabled]="isDownloading || (isPasswordRequired && downloadForm.invalid)"
+          [disabled]="isDownloading"
           class="download-card__button">
-          <!-- Download arrows cloud box native SVG icon representation path -->
+          
+          <!-- Left SVG cloud icon -->
           <svg class="download-card__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <path d="M16 16l-4-4-4 4M12 12v9"></path>
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
           </svg>
+
           {{ isDownloading ? 'Téléchargement...' : 'Télécharger' }}
+
+          <!-- Right SVG cloud icon -->
+          <svg class="download-card__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 16l-4-4-4 4M12 12v9"></path>
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+          </svg>
         </button>
+
 
       </div>
     </div>

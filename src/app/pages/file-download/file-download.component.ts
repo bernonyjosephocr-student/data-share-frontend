@@ -39,7 +39,7 @@ export class FileDownloadComponent implements OnInit {
     this.token = this.route.snapshot.paramMap.get('token');
     
     if (!this.token) {
-      this.errorMessage = 'Invalid resource link parameter matching criteria.';
+      this.errorMessage = 'Token invalide.';
       this.isExpired = true;
       return;
     }
@@ -95,7 +95,10 @@ export class FileDownloadComponent implements OnInit {
    * Posts credentials to Spring Boot cluster endpoint and downloads the resulting native attachment.
    */
   onExecuteDownload(): void {
+    console.info
     if (this.isExpired || !this.token || (this.isPasswordRequired && this.downloadForm.invalid)) {
+      this.errorMessage = this.isExpired || !this.token ? 'Token invalide.' : 'Mot de passe requis.';
+      console.debug('Download attempt blocked due to invalid state:', this.errorMessage);
       return;
     }
 

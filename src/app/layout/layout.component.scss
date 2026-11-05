@@ -1,3 +1,6 @@
+@use 'shared.scss';
+
+/*=============Host Structural Layout============*/
 :host {
   display: flex;
   flex-direction: column;
@@ -5,39 +8,13 @@
   min-height: 100vh;
   box-sizing: border-box;
   font-family: 'DM Sans', sans-serif;
-
-  background: linear-gradient(
-    172.84deg,
-    #FFB88C 2.29%,
-    #DE6262 97.71%
-  );
+  @include shared.brand-gradient;
 }
 
-/* ========================================
-   COMMON
-   ======================================== */
-:root {
-  --font-ui: "DM Sans", sans-serif;
-  --font-label: "Inter", sans-serif;
-
-  --text: #1e1e1e;
-  --placeholder: #b3b3b3;
-  --border: #d9d9d9;
-  --radius: 8px;
-
-  --primary-bg: rgb(255 129 45 / 13%);
-  --primary-border: rgb(205 94 20 / 50%);
-  --primary-text: #ba681f;
-
-  --accent: #e27f29;
-  --accent-border: #ffa569;
-
-  --dark-bg: #2c2c2c;
-  --dark-text: #f3eeea;
-
-  --disabled-text: #aea49b;
-  --disabled-bg: rgb(183 167 156 / 20%);
-  --disabled-dark-bg: #f4eee9;
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .main-content {
@@ -46,17 +23,20 @@
   flex-direction: column;
 }
 
-/* .header {
-  width: 100%;
-  min-height: 72px;
+.page-content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
   box-sizing: border-box;
-} */
+}
 
+/*=============Legacy Layout Selectors============*/
 .header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   width: 100%;
   min-height: 72px;
   padding: 0 16px;
@@ -71,186 +51,35 @@
 }
 
 .login-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-
-  width: 123px;
-  height: 40px;
-  padding: 12px;
-  box-sizing: border-box;
-
-  background: #2C2C2C;
-  border-radius: 8px;
-
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  color: #F3EEEA;
-
-  text-decoration: none;
+  @extend .button;
+  @extend .button--dark;
 }
 
-
-
-.footer {
-  width: 100%;
-  min-height: 56px;
-}
-
-.footer-content {
-  display: flex;
-  align-items: center;
-
-  width: 100%;
-  min-height: 56px;
-  padding: 16px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.footer-content p {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #FFFFFF;
-}
-.layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.page-content {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-/* ========================================
-   BUTTON COMPONENT
-   ======================================== */
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  
-  /* Dimensions fixes et centrées de votre maquette d'origine */
-  width: 123px;
-  height: 40px;
-  padding: 12px;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: 8px;
-  
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.button--small {
-  width: auto;
-  height: 32px;
-  padding: 8px 12px;
-}
-
-.button--secondary {
-  background: transparent;
-  color: #e27f29;
-  box-shadow: inset 0 0 0 1px #ffa569;
-}
-
-.button--tertiary {
-  background: transparent;
-  color: #e27f29;
-}
-
-.button--dark {
-  background: #2C2C2C !important; /* Couleur gris foncé rétablie */
-  color: #F3EEEA !important;     /* Couleur du texte claire rétablie */
-}
-
-
-/* ========================================
-   HEADER COMPONENT
-   ======================================== */
-
-
-/* ========================================
-   HEADER COMPONENT (Fixed Alignment)
-   ======================================== */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  background: transparent;
-  box-sizing: border-box;
-}
-
-.header__inner {
-  display: flex;
-  align-items: center; /* Centre verticalement le logo et le bouton */
-  justify-content: space-between; /* Pousse le logo à gauche et l'action à droite */
-  gap: 10px;
-  width: 100%;
-  
-  min-height: 72px;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-.header__brand {
-  color: #100218;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  text-decoration: none;
-  line-height: 1; /* Aligne proprement la ligne de base du texte */
-}
-
-.header__action {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center; /* Centre le bouton dans sa zone d'action */
-}
-
-/* ========================================
-   MON ESPACE COMPONENT CSS
-   ======================================== */
+/*=============My Space Wrapper Skeleton============*/
 .mon-espace {
   display: grid;
   grid-template-columns: 259px minmax(0, 1fr);
   min-height: 100vh;
   background: #fff8f3;
-  color: #000;
+  color: #000000;
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0;
+  box-sizing: border-box;
+}
+
+.mon-espace *,
+.mon-espace *::before,
+.mon-espace *::after {
+  box-sizing: border-box;
 }
 
 .mon-espace :where(h1, p) {
   margin: 0;
 }
 
-/* ========================================
-   BARRE LATÉRALE
-   ======================================== */
-
+/*=============Sidebar Section Block============*/
 .mon-espace__sidebar {
   display: flex;
   flex-direction: column;
@@ -260,8 +89,6 @@
     #ffb88c 0%,
     #de6262 100%
   );
-
-  /* Contour intérieur, sans réduire le contenu */
   box-shadow: inset -2px 0 rgb(98 54 26 / 15%);
 }
 
@@ -273,7 +100,7 @@
 }
 
 .mon-espace__brand {
-  color: #fff;
+  color: #ffffff;
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
@@ -313,10 +140,7 @@
   line-height: 24px;
 }
 
-/* ========================================
-   BARRE SUPÉRIEURE
-   ======================================== */
-
+/*=============Toolbar Header Controls============*/
 .mon-espace__main {
   min-width: 0;
 }
@@ -338,6 +162,7 @@
   gap: 10px;
 }
 
+/*=============Toolbar Specific Buttons============*/
 .mon-espace__button {
   display: inline-flex;
   flex: 0 0 auto;
@@ -356,20 +181,10 @@
   cursor: pointer;
 }
 
-/* « Ajouter des fichiers » */
-
 .mon-espace__button--dark {
   background: #2c2c2c;
   color: #f3eeea;
 }
-
-/* « Supprimer » et « Accéder » */
-
-.mon-espace__button--outline {
-  box-shadow: inset 0 0 0 1px #ffa569;
-}
-
-/* « Déconnexion » */
 
 .mon-espace__button--tertiary {
   background: transparent;
@@ -377,36 +192,20 @@
   box-shadow: none;
 }
 
-.mon-espace__button-icon {
-  display: block;
-  flex: 0 0 16px;
-  width: 16px;
-  height: 16px;
-}
-
-/* ========================================
-   INTERACTION EFFECTS FOR ACTION BUTTONS
-   ======================================== */
-
-/* Effet au survol (Hover) pour inviter au clic */
 .mon-espace__button--clickable:hover {
   opacity: 0.85;
-  color: #ba681f; /* Rend la couleur orange un peu plus soutenue au survol */
+  color: #ba681f;
 }
 
-/* Matérialisation du clic (Active state) */
 .mon-espace__button--clickable:active {
-  transform: scale(0.95); /* Effet d'enfoncement physique du bouton */
-  opacity: 0.7;           /* Changement d'aspect visuel par transparence instantanée */
-  transition: transform 0.05s ease; /* Transition ultra-rapide pour être réactif */
+  transform: scale(0.95);
+  opacity: 0.7;
+  transition: transform 0.05s ease;
 }
 
-/* Alignement parfait de l'icône SVG à gauche du texte déconnexion */
 .mon-espace__button-icon {
   display: inline-block;
   vertical-align: middle;
   width: 16px;
   height: 16px;
 }
-
-

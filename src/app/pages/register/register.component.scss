@@ -1,3 +1,6 @@
+@use 'shared.scss';
+
+/*=============Register Container Context============*/
 :host {
   display: flex;
   flex: 1;
@@ -14,42 +17,16 @@
 }
 
 .register-card {
-  display: flex;
-  flex-direction: column;
+  @extend .auth-card;
   align-items: stretch;
-  gap: 24px;
-
-  width: 640px;
-  max-width: 100%;
   min-height: 472px;
-  padding: 24px;
-  box-sizing: border-box;
-
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
-}
-
-.register-card h1 {
-  width: 100%;
-  height: 40px;
-  margin: 0;
-
-  color: #000000;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 40px;
-  text-align: center;
 }
 
 .register-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 0;
+  @extend .auth-form-container;
 }
 
+/*=============Register Specific Form Groups============*/
 .register-fields {
   display: flex;
   flex-direction: column;
@@ -58,47 +35,15 @@
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
+  @extend .auth-form-group;
+
+  input:focus-visible {
+    outline: 2px solid #e98a79;
+    outline-offset: 1px;
+  }
 }
 
-.form-group label {
-  color: #1e1e1e;
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-}
-
-.form-group input {
-  width: 100%;
-  height: 40px;
-  min-width: 0;
-  padding: 0 16px;
-  box-sizing: border-box;
-
-  background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-
-  color: #1e1e1e;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-group input::placeholder {
-  color: #b3b3b3;
-  opacity: 1;
-}
-
-.form-group input:focus-visible {
-  outline: 2px solid #e98a79;
-  outline-offset: 1px;
-}
-
+/*=============Register Action Triggers============*/
 .register-actions {
   display: flex;
   flex-direction: column;
@@ -107,22 +52,28 @@
 }
 
 .login-link {
+  @extend .btn-interaction-base;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 40px;
-
   color: #e27f29;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   text-decoration: none;
-}
 
-.login-link:hover {
-  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ba681f;
+    outline-offset: 2px;
+  }
 }
 
 .register-button {
+  @extend .btn-interaction-base;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,42 +81,37 @@
   min-height: 40px;
   padding: 12px;
   box-sizing: border-box;
-
   background: rgba(255, 129, 45, 0.13);
   border: 1px solid rgba(205, 94, 20, 0.5);
   border-radius: 8px;
-
   color: #ba681f;
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   line-height: 16px;
-  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 129, 45, 0.2);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ba681f;
+    outline-offset: 2px;
+  }
 }
 
-.register-button:hover {
-  background: rgba(255, 129, 45, 0.2);
+/*=============Register Feedbacks & Breakpoints============*/
+.form-error {
+  @extend .auth-form-error;
+  margin: 16px 0 0;
+  text-align: center;
 }
 
-.form-error,
 .form-success {
   margin: 16px 0 0;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   text-align: center;
-}
-
-.form-error {
-  color: #b42318;
-}
-
-.form-success {
   color: #067647;
-}
-
-.register-button:focus-visible,
-.login-link:focus-visible {
-  outline: 2px solid #ba681f;
-  outline-offset: 2px;
 }
 
 @media (max-width: 600px) {

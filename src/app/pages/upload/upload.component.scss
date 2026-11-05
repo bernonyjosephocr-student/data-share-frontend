@@ -1,13 +1,12 @@
-/* ================Main wrapper======================== */
+@use 'shared.scss';
+
+/*=============Structural Wrapper Context============*/
 .televersement__main-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-
-/* Polices à charger : DM Sans (400, 700) et Inter (400).
-   Icônes à fournir séparément en SVG. */
 
 .upload-card,
 .upload-card *,
@@ -16,24 +15,11 @@
   box-sizing: border-box;
 }
 
-/* Carte principale */
-
+/*=============Upload Panel Component============*/
 .upload-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  @extend .action-card-panel;
   width: 412px;
-  max-width: 100%;
   padding: 24px 32px;
-  border-radius: 16px;
-  background: #fff;
-  color: #000;
-  box-shadow: 0 0 12px rgb(0 0 0 / 25%);
-  font-family: "DM Sans", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0;
 }
 
 .upload-card__title {
@@ -43,8 +29,7 @@
   text-align: center;
 }
 
-/* Fichier sélectionné */
-
+/*=============Selected File Preview Row============*/
 .upload-card__file-row {
   display: flex;
   align-items: center;
@@ -54,45 +39,30 @@
 }
 
 .upload-card__file {
-  display: flex;
+  @extend .document-file-row;
   flex: 1;
-  align-items: center;
-  gap: 16px;
   min-width: 0;
   min-height: 56px;
   padding: 8px;
 }
 
 .upload-card__file-icon {
-  display: block;
-  flex: 0 0 24px;
-  width: 24px;
-  height: 24px;
+  @extend .document-file-icon-wrapper;
 }
 
 .upload-card__file-details {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
+  @extend .document-file-info-container;
 }
 
 .upload-card__file-name {
-  margin: 0;
-  overflow: hidden;
-  font: 400 16px/24px "Inter", sans-serif;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @extend .document-file-primary-text;
 }
 
 .upload-card__file-size {
-  margin: 0;
-  font: 400 14px/16px "DM Sans", sans-serif;
+  @extend .document-file-secondary-text;
 }
 
-/* Champs */
-
+/*=============Form Management Elements============*/
 .upload-card__fields {
   display: flex;
   flex-direction: column;
@@ -154,35 +124,27 @@
   pointer-events: none;
 }
 
-/* Téléverser button */
-
+/*=============Action Triggers Implementation============*/
 .upload-card__button {
-  display: inline-flex;
+  @extend .button;
   flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   min-height: 40px;
   padding: 12px;
-  border: 0;
-  border-radius: 8px;
   background: rgb(255 129 45 / 13%);
   color: #ba681f;
   box-shadow: inset 0 0 0 1px rgb(205 94 20 / 50%);
   font: 400 16px/16px "DM Sans", sans-serif;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
 }
 
-/* Changer button*/
-
 .upload-card__button--change {
+  @extend .btn-interaction-base;
   min-height: 32px;
   padding: 8px 12px;
   background: transparent;
   color: #e27f29;
   box-shadow: inset 0 0 0 1px #ffa569;
+  border-radius: 8px;
+  font: 400 16px/16px "DM Sans", sans-serif;
 }
 
 .upload-card__button-icon {
@@ -192,139 +154,97 @@
   height: 16px;
 }
 
-.upload-card__button-icon,
+/*=============Success State Panel Layout============*/
+.upload-success {
+  @extend .action-card-panel;
+  width: 544px;
+  padding: 24px 32px;
+}
+
+.upload-success__title {
+  width: 100%;
+  margin: 0;
+  font: 700 28px/40px "DM Sans", sans-serif;
+  text-align: center;
+}
+
+.upload-success__file {
+  @extend .document-file-row;
+  min-height: 56px;
+  padding: 8px;
+}
+
+.upload-success__file-icon {
+  @extend .document-file-icon-wrapper;
+  color: #e27f29;
+}
+
+.upload-success__file-details {
+  @extend .document-file-info-container;
+}
+
+.upload-success__file-name {
+  @extend .document-file-primary-text;
+}
+
+.upload-success__file-size {
+  @extend .document-file-secondary-text;
+  color: #666666;
+}
+
+.upload-success__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.upload-success__message {
+  margin: 0;
+  font: 400 16px/24px "Inter", sans-serif;
+}
+
+.upload-success__share-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  margin-right: 0px;
+  min-height: 40px;
+  border-radius: 8px;
+  background: rgb(164 153 147 / 10%);
+}
+
+.upload-success__share-link {
+  min-width: 0;
+  color: #d8640b;
+  font: 400 16px/24px "Inter", sans-serif;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+.upload-success__actions-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.upload-success__copy-button {
+  @extend .button;
+  min-height: 40px;
+  padding: 12px;
+  background: rgb(255 129 45 / 13%);
+  color: #ba681f;
+  box-shadow: inset 0 0 0 1px rgb(205 94 20 / 50%);
+  font: 400 16px/16px "DM Sans", sans-serif;
+}
+
 .upload-success__copy-icon {
   display: block;
   flex: 0 0 16px;
   width: 16px;
   height: 16px;
   color: #ba681f;
-}
-
-/* ===============SUCCESS CARD=========================*/
-.upload-success {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  width: 544px;
-  max-width: 100%;
-  padding: 24px 32px;
-  border-radius: 16px;
-  background: #fff;
-  color: #000;
-  box-shadow: 0 0 12px rgb(0 0 0 / 25%);
-  font-family: "DM Sans", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0;
-
-  &__title {
-    width: 100%;
-    margin: 0;
-    font: 700 28px/40px "DM Sans", sans-serif;
-    text-align: center;
-  }
-
-  &__file {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    min-height: 56px;
-    padding: 8px;
-  }
-
-  &__file-icon {
-    display: block;
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-    color: #e27f29;
-  }
-
-  &__file-details {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-  }
-
-  &__file-name {
-    margin: 0;
-    overflow: hidden;
-    font: 400 16px/24px "Inter", sans-serif;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &__file-size {
-    margin: 0;
-    font: 400 14px/16px "DM Sans", sans-serif;
-    color: #666;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-  }
-
-  &__message {
-    margin: 0;
-    font: 400 16px/24px "Inter", sans-serif;
-  }
-
-  &__share-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 8px;
-    margin-right: 0px;
-    min-height: 40px;
-    border-radius: 8px;
-    background: rgb(164 153 147 / 10%);
-  }
-
-  &__share-link {
-    min-width: 0;
-    color: #d8640b;
-    font: 400 16px/24px "Inter", sans-serif;
-    text-decoration: underline;
-    overflow-wrap: anywhere;
-  }
-
-  &__actions-group {
-    display: flex;
-    gap: 12px;
-    width: 100%;
-    margin-top: 8px;
-  }
-
-  &__copy-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-height: 40px;
-    padding: 12px;
-    border: 0;
-    border-radius: 8px;
-    background: rgb(255 129 45 / 13%);
-    color: #ba681f;
-    box-shadow: inset 0 0 0 1px rgb(205 94 20 / 50%);
-    font: 400 16px/16px "DM Sans", sans-serif;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-
-  &__copy-icon {
-    display: block;
-    flex: 0 0 16px;
-    width: 16px;
-    height: 16px;
-  }
 }

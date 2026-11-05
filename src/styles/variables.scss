@@ -1,0 +1,33 @@
+/*=============Design System Variables============*/
+:root {
+  --font-ui: "DM Sans", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  --text: #1e1e1e;
+  --placeholder: #b3b3b3;
+  --border: #d9d9d9;
+  --radius: 8px;
+
+  --primary-bg: rgb(255 129 45 / 13%);
+  --primary-border: rgb(205 94 20 / 50%);
+  --primary-text: #ba681f;
+
+  --accent: #e27f29;
+  --accent-border: #ffa569;
+
+  --dark-bg: #2c2c2c;
+  --dark-text: #f3eeea;
+
+  --disabled-text: #aea49b;
+  --disabled-bg: rgb(183 167 156 / 20%);
+  --disabled-dark-bg: #f4eee9;
+}
+
+/*=============Shared Mixins============*/
+@mixin brand-gradient {
+  background: linear-gradient(
+    172.84deg,
+    #FFB88C 2.29%,
+    #DE6262 97.71%
+  );
+}
