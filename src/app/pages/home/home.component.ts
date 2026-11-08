@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FileService } from '../../core/service/file.service';
+import { UI_CONSTRAINTS } from '../../core/config/validation.constraints';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,7 @@ export class HomeComponent {
   private readonly router = inject(Router);
 
   errorMessage: string = '';
-  private readonly MAX_FILE_SIZE_BYTES = 1024 * 1024 * 1024; // 1 GB
-  private readonly FORBIDDEN_EXTENSIONS = ['.exe', '.bat', '.cmd', '.sh'];
+  private readonly constraints = UI_CONSTRAINTS;
 
   onFileSelected(event: any): void {
     const fileList: FileList = event.target.files;
@@ -25,14 +25,14 @@ export class HomeComponent {
   
     const file = fileList[0];
 
-    if (file.size > this.MAX_FILE_SIZE_BYTES) {
-      this.errorMessage = 'The file selected exceeds the maximum allowed size of 1 GB.';
+    if (file.size > this.constraints.upload.file.maxSizeInBytes) {
+      this.errorMessage = this.constraints.upload.file.errorTooLarge;
       return;
     }
 
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
-    if (fileExtension && this.FORBIDDEN_EXTENSIONS.includes(`.${fileExtension}`)) {
-      this.errorMessage = 'The file type is not allowed.';
+    if (fileExtension && this.constraints.upload.file.forbiddenExtensions.includes(`.${fileExtension}`)) {
+      this.errorMessage = this.constraints.upload.file.errorBadExtension;
       return;
     }
     this.fileService.currentFileToUpload = file;

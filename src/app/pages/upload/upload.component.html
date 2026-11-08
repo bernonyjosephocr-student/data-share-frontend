@@ -69,19 +69,19 @@
       <!-- Global Error Handler Callout -->
       @if (errorMessage) {
         <div class="callout callout--error">
-          <p class="callout__label">{{ errorMessage }}</p>
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span class="callout__text">{{ errorMessage }}</span>
         </div>
-      }
+      }      
 
     <button 
         type="submit" 
-        [disabled]="uploadForm.invalid || isUploading" 
+        [disabled]="isUploading" 
         class="upload-card__button">
         <!-- Cloud Upload SVG Icon -->
         <svg class="upload-card__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="17 8 12 3 7 8"></polyline>
-            <line x1="12" y1="3" x2="12" y2="15"></line>
+          <path d="M16 16l-4-4-4 4M12 12v9"></path>
+          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
         </svg>
         {{ isUploading ? 'Téléversement...' : 'Téléverser' }}
     </button>

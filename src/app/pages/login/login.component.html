@@ -17,6 +17,7 @@
           autocomplete="email"
           required
           email
+          [class.field-input--error]="emailInput.invalid && (emailInput.touched || loginForm.submitted)"
         />
           @if (emailInput.invalid && (emailInput.touched || loginForm.submitted)) {
             <small class="field-error">
@@ -41,7 +42,8 @@
           #passwordInput="ngModel"
           placeholder="Votre mot de passe"
           autocomplete="current-password"
-          required          
+          required
+          [class.field-input--error]="passwordInput.invalid && (passwordInput.touched || loginForm.submitted)"
         />
         @if (passwordInput.invalid && (passwordInput.touched || loginForm.submitted)) {
           <small class="field-error">
@@ -50,7 +52,10 @@
         }
       </div>
       @if (errorMessage) {
-        <p class="form-error" role="alert">{{ errorMessage }}</p>
+        <div class="callout callout--error">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span class="callout__text">{{ errorMessage }}</span>
+        </div>
       }
       <p class="register-link">
         <a routerLink="/register">Créer un compte</a>

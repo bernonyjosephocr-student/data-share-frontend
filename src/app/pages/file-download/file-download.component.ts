@@ -130,8 +130,21 @@ export class FileDownloadComponent implements OnInit {
       },
       error: (error) => {
           this.isDownloading = false;
-          this.errorMessage = 'Téléchargement impossible. Veuillez vérifier le mot de passe renseigné.';
-          console.error('Binary payload fetch execution broken:', error);
+        // Handling the error message
+        if (error.error && typeof error.error === 'object' && error.error.message) {
+          // JSON msg
+          this.errorMessage = error.error.message;
+        } else if (error.error && typeof error.error === 'string') {
+          // Text msg
+          this.errorMessage = error.error;
+        } else if (error.status === 0) {
+          // Server down
+          this.errorMessage = 'Impossible de joindre le serveur. Veuillez vérifier votre connexion.';
+        } else {
+          // Worst case
+          this.errorMessage = `Erreur (${error.status}) : ${error.statusText || 'Téléchargement impossible. Veuillez vérifier le mot de passe renseigné.'}`;
+        }      
+        console.error('Binary payload fetch execution broken:', error);
       }
     });
   }

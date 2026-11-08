@@ -308,3 +308,29 @@
   flex: 1;
   min-width: 0;
 }
+
+/*============= Global Form Field Error Borders =============*/
+.form-input-base.ng-invalid.ng-touched,
+.auth-form-group input.ng-invalid.ng-touched,
+.upload-card__input.ng-invalid.ng-touched,
+.upload-card__select.ng-invalid.ng-touched,
+.download-card__input.ng-invalid.ng-touched {
+  border-color: #e8a6a6 !important;
+  box-shadow: 0 0 0 1px #e8a6a6 !important;
+  background-color: #fff9f9 !important;
+
+  &:focus, &:focus-visible {
+    outline: 2px solid #e8a6a6 !important;
+    outline-offset: 1px;
+  }
+}
+
+/*============= Specific Template Error Class =============*/
+.field-input--error {
+  border: 1px solid #e8a6a6 !important;
+  background-color: #fff9f9 !important;
+  
+  &:focus {
+    outline: 2px solid #e8a6a6 !important;
+  }
+}

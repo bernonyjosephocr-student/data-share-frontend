@@ -10,14 +10,20 @@
   box-sizing: border-box;
 }
 
+/*============= Login Card Elements =============*/
 .login-card {
   @extend .auth-card;
-  height: 384px;
+  min-height: 384px; /* CORRIGÉ : min-height au lieu de height fixe */
+  height: auto;       /* Permet à la carte de s'étirer si nécessaire */
   flex: none;
 
   form {
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
     align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    margin: 0;
   }
 }
 
