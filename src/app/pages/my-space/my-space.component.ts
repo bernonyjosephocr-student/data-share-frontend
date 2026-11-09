@@ -24,7 +24,7 @@ export class MySpaceComponent implements OnInit {
   filteredFiles: FileMetadata[] = [];
   
   // Active filter state binding
-  activeFilter: FileFilter = 'ALL';
+  activeFilter: FileFilter = 'ACTIVE';
   
   isLoading: boolean = false;
   errorMessage: string = '';

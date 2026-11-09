@@ -42,7 +42,7 @@
             #passwordInput="ngModel"
             placeholder="Saisissez votre mot de passe..."
             autocomplete="new-password"
-            minlength="constraints.auth.password.minLength"
+            [minlength]="constraints.auth.password.minLength"
             required
             [class.field-input--error]="passwordInput.invalid && (passwordInput.touched || registerForm.submitted)"
           />

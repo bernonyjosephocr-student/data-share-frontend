@@ -30,6 +30,12 @@ export class HomeComponent {
       return;
     }
 
+    if(file.size === 0) {
+      console.debug('Le fichier est vide' + file.size);
+      this.errorMessage = this.constraints.upload.file.errorEmpty;
+      return;
+    }
+
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
     if (fileExtension && this.constraints.upload.file.forbiddenExtensions.includes(`.${fileExtension}`)) {
       this.errorMessage = this.constraints.upload.file.errorBadExtension;

@@ -13,7 +13,8 @@ export const UI_CONSTRAINTS = Object.freeze({
     file: {
       maxSizeInBytes: 1073741824, // 1 Go
       forbiddenExtensions: ['.exe', '.bat', '.cmd', '.sh'],
-      errorTooLarge: 'Le fichier dépasse la taille maximale autorisée (100 Mo).',
+      errorTooLarge: 'Le fichier dépasse la taille maximale autorisée (1000 Mo).',
+      errorEmpty: 'Le fichier ne peut etre vide .',
       errorBadExtension: 'Ce format de fichier n\'est pas supporté.',
       password: {
         minLength: 6,

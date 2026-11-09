@@ -59,9 +59,9 @@
             <p class="mon-espace__file-name">{{ file.name }}</p>
             
             @if (isFileExpired(file.expiryDate)) {
-              <p class="mon-espace__file-expiration">Expiré le {{ file.expiryDate | date:'dd/MM/yyyy' }}</p>
+              <p class="mon-espace__file-expiration">Expiré le {{ file.expiryDate | date:'dd/MM/yyyy HH:mm' }}</p>
             } @else {
-              <p class="mon-espace__file-expiration">Expire le {{ file.expiryDate | date:'dd/MM/yyyy' }}</p>
+              <p class="mon-espace__file-expiration">Expire le {{ file.expiryDate | date:'dd/MM/yyyy HH:mm' }}</p>
             }
           </div>
 

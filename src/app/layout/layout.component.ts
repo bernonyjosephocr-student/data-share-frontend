@@ -20,4 +20,19 @@ export class LayoutComponent {
     this.userService.clearSession();
     this.router.navigate(['/']);
   }
+
+  /**
+   * Forces a clean state refresh of the my-space route path, when clicking on the menu "Mes fichiers"
+   */
+  refreshMySpaceList(): void {
+    if (this.router.url === '/my-space') {
+      // Force the reload of
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        void this.router.navigate(['/my-space']);
+      });
+    }
+  }
+
+
+
 }
