@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Router} from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { FileService } from '../../core/service/file.service';
 import { UI_CONSTRAINTS } from '../../core/config/validation.constraints';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
