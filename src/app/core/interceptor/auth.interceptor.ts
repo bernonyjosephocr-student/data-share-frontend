@@ -3,10 +3,10 @@ import { inject } from '@angular/core';
 import { UserService } from '../service/user.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  // 1. FIXED: Removed 'private' keyword inside the function body
+  //Inject the user service
   const userService = inject(UserService);
   
-  // 2. OPTIMIZED: Retrieve the token once and store it in a variable if it is not expired.
+  // Retrieve the token once and store it in a variable if it is not expired.
   const token = userService.getToken();
 
   // Attach the token for the following backend API paths
@@ -18,8 +18,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   // Do not attach the token for public authentication paths
   const isPublicEndpoint =
-    req.url.endsWith('/api/login') ||
-    req.url.endsWith('/api/register') ||
+    req.url.endsWith('/api/auth/login') ||
+    req.url.endsWith('/api/auth/register') ||
     req.url.endsWith('/api/files') ||
     req.url.endsWith('/api/files/download') ;
 

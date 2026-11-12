@@ -85,7 +85,6 @@ export class UploadComponent implements OnInit {
   addTag(event: Event): void {
     event.preventDefault();
     const cleanTag = this.tagInput.trim().toLowerCase();
-      this.tags.add(cleanTag);
     if (cleanTag && cleanTag.length >= this.constraints.upload.tag.minLength && cleanTag.length <= this.constraints.upload.tag.maxLength && !this.tags.has(cleanTag)) {
       this.tags.add(cleanTag);
     }else {
