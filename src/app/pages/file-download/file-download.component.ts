@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { DownloadPayload } from '../../core/interface/DownloadPayload';
 import {FileService} from "../../core/service/file.service";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-file-download',
@@ -128,23 +129,33 @@ export class FileDownloadComponent implements OnInit {
         document.body.removeChild(downloadAnchor);
         window.URL.revokeObjectURL(blobUrl);
       },
-      error: (error) => {
-          this.isDownloading = false;
-        // Handling the error message
-        if (error.error && typeof error.error === 'object' && error.error.message) {
-          // JSON msg
-          this.errorMessage = error.error.message;
-        } else if (error.error && typeof error.error === 'string') {
-          // Text msg
-          this.errorMessage = error.error;
-        } else if (error.status === 0) {
-          // Server down
-          this.errorMessage = 'Impossible de joindre le serveur. Veuillez vérifier votre connexion.';
-        } else {
-          // Worst case
-          this.errorMessage = `Erreur (${error.status}) : ${error.statusText || 'Téléchargement impossible. Veuillez vérifier le mot de passe renseigné.'}`;
-        }      
+      error: async (error: HttpErrorResponse) => {
+        this.isDownloading = false;
+
         console.error('Binary payload fetch execution broken:', error);
+
+        if (error.status === 0) {
+          this.errorMessage = 'Impossible de joindre le serveur. Veuillez vérifier votre connexion.';
+
+        } else if (error.error instanceof Blob) {
+          const responseText = await error.error.text();
+
+          try {
+            const body = JSON.parse(responseText);
+            this.errorMessage = body.message || responseText;
+          } catch {
+            this.errorMessage = responseText;
+          }
+
+        } else if (error.error && typeof error.error === 'object' && error.error.message) {
+          this.errorMessage = error.error.message;
+
+        } else if (error.error && typeof error.error === 'string') {
+          this.errorMessage = error.error;
+
+        } else {
+          this.errorMessage = `Erreur (${error.status}) : ${error.statusText || 'Téléchargement impossible. Veuillez vérifier le mot de passe renseigné.'}`;
+        }
       }
     });
   }
