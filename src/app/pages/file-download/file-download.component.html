@@ -3,10 +3,10 @@
   <!-- CASE 1: LINK EXPIRED ERROR SCREEN -->
   @if (isExpired) {
     <div class="download-expired">
-      <h2 class="download-expired__title">Télécharger un fichier</h2>
+      <h1 class="download-expired__title">Télécharger un fichier</h1>
 
       <div class="callout callout--error">
-        <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <svg class="callout__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
         <span class="callout__text">{{ errorMessage || 'Ce lien de partage a expiré ou le fichier n\'est plus disponible sur la plateforme.' }}</span>
       </div>
 
@@ -16,14 +16,14 @@
   <!-- CASE 2: ACTIVE SECURED DOWNLOAD FORM INTERFACE  -->
   @else {
     <div class="download-card">
-      <h2 class="download-card__title">Télécharger un fichier</h2>
+      <h1 class="download-card__title">Télécharger un fichier</h1>
 
       <div class="download-card__content">
         
         <!-- File Name and Calculated Metas Summary Header -->
         <div class="download-card__file">
           <!-- Document native folder file lock SVG icon -->
-          <svg class="download-card__file-icon" viewBox="0 0 24 24" fill="none" stroke="#ba681f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="download-card__file-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="#ba681f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
           </svg>
@@ -37,7 +37,7 @@
         <!-- Case: File expires tomorrow (Orange Warning Box Modifier) -->
         @if (remainingDays === 1) {
           <div class="callout callout--warning">
-            <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <svg class="callout__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
             <span class="callout__text">Ce fichier expirera demain.</span>
           </div>
 
@@ -45,7 +45,7 @@
         <!-- Case: File has multiple days left (Blue Info Box Modifier) -->
         @else {
           <div class="callout callout--info">
-            <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <svg class="callout__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
             <span class="callout__text">Ce fichier expirera dans {{ remainingDays }} jours.</span>
           </div>
         }
@@ -54,8 +54,9 @@
         @if (isPasswordRequired) {
           <form [formGroup]="downloadForm" class="download-card__fields-wrapper">
             <div class="download-card__field">
-              <label class="download-card__label">Mot de passe</label>
-              <input 
+              <label class="download-card__label" for="motDePass">Mot de passe</label>
+              <input
+                id="motDePass"
                 type="password" 
                 formControlName="password" 
                 placeholder="Entrez le mot de passe de protection..." 
@@ -67,7 +68,7 @@
         <!-- Global failure handler callout message block if decryption keys mismatched -->
         @if (errorMessage) {
           <div class="callout callout--error">
-            <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <svg class="callout__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
             <span class="callout__text">{{ errorMessage }}</span>
           </div>
         }
@@ -79,7 +80,7 @@
           class="download-card__button">
           
           <!-- Left SVG cloud icon -->
-          <svg class="download-card__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="download-card__button-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8 12l4 4 4-4M12 4v12"></path>
             <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
           </svg>
@@ -87,7 +88,7 @@
           {{ isDownloading ? 'En cours...' : 'Télécharger' }}
 
           <!-- Right SVG cloud icon -->
-          <svg class="download-card__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="download-card__button-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8 12l4 4 4-4M12 4v12"></path>
             <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
           </svg>

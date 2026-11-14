@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FileMetadata } from '../../core/interface/FileMetadata';
 import { UserService } from '../../core/service/user.service';
 import { UI_CONSTRAINTS } from '../../core/config/validation.constraints';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-upload',
@@ -23,6 +24,7 @@ export class UploadComponent implements OnInit {
   private readonly fileService = inject(FileService);
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
+  private readonly titleService =  inject(Title);
 
   private readonly constraints = UI_CONSTRAINTS;
 
@@ -44,7 +46,9 @@ export class UploadComponent implements OnInit {
   errorMessage: string = '';
 
   ngOnInit(): void {
-      // Get the file selected in HomeComponent and validate it here.
+    this.titleService.setTitle('DataShare - Ajouter un fichier');
+
+    // Get the file selected in HomeComponent and validate it here.
     const fileFromHome = this.fileService.currentFileToUpload;
 
     if (!fileFromHome) {

@@ -2,10 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { DownloadPayload } from '../../core/interface/DownloadPayload';
 import {FileService} from "../../core/service/file.service";
-import { HttpErrorResponse } from '@angular/common/http';
+import  { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-file-download',
@@ -20,6 +20,7 @@ export class FileDownloadComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly http = inject(HttpClient);
   private readonly fileService = inject(FileService);
+  private readonly titleService = inject(Title);
 
   downloadForm!: FormGroup;
   
@@ -36,6 +37,8 @@ export class FileDownloadComponent implements OnInit {
   errorMessage: string = '';
 
   ngOnInit(): void {
+    this.titleService.setTitle('DataShare - Télécharger un fichier');
+
     // 1. Intercept the unique routing token parameter from the URL path context
     this.token = this.route.snapshot.paramMap.get('token');
     

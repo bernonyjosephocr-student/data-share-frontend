@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FileMetadata } from '../../core/interface/FileMetadata';
 import { FileService } from '../../core/service/file.service';
+import { Title } from '@angular/platform-browser';
 
 // Filter type for the file list view
 export type FileFilter = 'ALL' | 'ACTIVE' | 'EXPIRED';
@@ -17,7 +18,8 @@ export type FileFilter = 'ALL' | 'ACTIVE' | 'EXPIRED';
 })
 export class MySpaceComponent implements OnInit {
   private readonly router = inject(Router);
-  private readonly fileService = inject(FileService);  
+  private readonly fileService = inject(FileService);
+  private readonly titleService = inject(Title);
 
   // Core data arrays
   allFiles: FileMetadata[] = [];
@@ -31,6 +33,7 @@ export class MySpaceComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchUserFiles();
+    this.titleService.setTitle('DataShare - Mes fichiers');
   }
 
   /**

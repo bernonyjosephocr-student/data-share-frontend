@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { UserService } from '../../core/service/user.service';
 import { UI_CONSTRAINTS } from '../../core/config/validation.constraints';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ export class RegisterComponent {
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
   protected readonly constraints = UI_CONSTRAINTS;
+  protected readonly titleService = inject(Title);
 
   email = '';
   password = '';
@@ -21,6 +23,10 @@ export class RegisterComponent {
   errorMessage = '';
   successMessage = '';
   isSubmitting = false;
+
+  ngOnInit(): void {
+    this.titleService.setTitle('DataShare - Créer un compte');
+  }
 
   onSubmit(): void {
     this.errorMessage = '';

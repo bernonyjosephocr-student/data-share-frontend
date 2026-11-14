@@ -3,6 +3,7 @@ import { Router} from '@angular/router';
 
 import { FileService } from '../../core/service/file.service';
 import { UI_CONSTRAINTS } from '../../core/config/validation.constraints';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,15 @@ import { UI_CONSTRAINTS } from '../../core/config/validation.constraints';
 export class HomeComponent {
   private readonly fileService = inject(FileService);
   private readonly router = inject(Router);
-
+  private readonly titleService = inject(Title);
+  
   errorMessage: string = '';
   private readonly constraints = UI_CONSTRAINTS;
+
+
+  ngOnInit(): void {
+    this.titleService.setTitle('DataShare - Tu veux partager un fichier ?');
+  }
 
   onFileSelected(event: any): void {
     const fileList: FileList = event.target.files;

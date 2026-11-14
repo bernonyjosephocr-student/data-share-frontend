@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../core/service/user.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +13,16 @@ import { UserService } from '../../core/service/user.service';
 export class LoginComponent {
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
+  private readonly titleService = inject(Title);
 
   email = '';
   password = '';
   errorMessage = '';
   isSubmitting = false;
+
+  ngOnInit(): void {
+    this.titleService.setTitle('DataShare - Connexion');
+  }
 
   onSubmit(): void {
     this.errorMessage = '';
