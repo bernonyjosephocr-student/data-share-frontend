@@ -26,16 +26,16 @@ export class LoginComponent {
 
   onSubmit(): void {
     this.errorMessage = '';
-    this.isSubmitting = true;
 
     if (!this.email.trim() || !this.password) {
       this.errorMessage = 'Tous les champs sont obligatoires.';
       return;
     }
+   this.isSubmitting = true;
 
     this.userService.login({ email: this.email, password: this.password }).subscribe({
       next: ({ token }) => {
-        console.info('Login successful. Received token:', token);
+        console.info('Login successful. Received token:', token != null);
         this.userService.saveToken(token);
         this.isSubmitting = false;
         void this.router.navigate(['/']);

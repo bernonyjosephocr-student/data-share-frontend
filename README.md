@@ -178,11 +178,12 @@ Les principaux éléments du projet sont organisés dans le répertoire `src/app
 
 On y retrouve notamment :
 
-- `components/` : composants réutilisables de l'interface.
+- `layout/` : Le composant wrapper.
 - `pages/` : pages correspondant aux différentes fonctionnalités de l'application.
-- `services/` : services chargés de la communication avec le backend et de la gestion des données.
-- `guards/` : protections des routes nécessitant une authentification.
-- `interceptors/` : interception des requêtes HTTP, notamment pour la transmission du jeton d'authentification.
+- `core/services/` : services chargés de la communication avec le backend et de la gestion des données.
+- `core/guards/` : protections des routes nécessitant une authentification.
+- `core/interceptors/` : interception des requêtes HTTP, notamment pour la transmission du jeton d'authentification.
+- `core/interface/` : équivalents de DTO du Backend
 
 Les autres fichiers de configuration Angular, TypeScript, Jest et Cypress se trouvent à la racine du projet.
 
